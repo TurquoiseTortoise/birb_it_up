@@ -245,7 +245,7 @@ def birb_it_up():
                        password = '',
                        msg_to = '',
                        msg_bcc = '',
-                       msg_subject = 'birb',
+                       msg_subject = 'birb!',
                        msg_body = str(url) + '\nhttps://geekhack.org/index.php?topic=79513.0')
     
         if len(new_posts) > 0:
