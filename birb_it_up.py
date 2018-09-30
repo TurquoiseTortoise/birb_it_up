@@ -9,23 +9,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart 
 from email.mime.base import MIMEBase 
 from email import encoders
-import datetime
-
-def get_dates(file_path):
-    date_pattern = r'\d{8}'
-    dates = re.findall(date_pattern, file_path)
-    return dates
-
-def change_date(date):
-    date = str(date[4:6]) + '-' + str(date[6:8]) + '-' + str(date[:4]) 
-    return date
-
-def get_current_date():
-    year = datetime.datetime.today().year
-    month = datetime.datetime.today().month
-    day = datetime.datetime.today().day
-    current_date = str(year).zfill(4) + str(month).zfill(2) + str(day).zfill(2)
-    return current_date
 
 def send_email(
     username = '',
@@ -213,7 +196,7 @@ def check_sales_thread_edit(home_page = 'https://geekhack.org/index.php?topic=79
     sales_post = get_posts(home_page_text)[0]
     last_edit = re_time_stamp(get_last_edit(sales_post))
     if edit_check(last_edit) == True:
-        print(str(get_current_date()) + ': sales thread update!')
+        print('sales thread update!')
         image_list = get_images(sales_post)
         image_string = list_to_string(image_list)
         send_email(username = '',
@@ -223,7 +206,7 @@ def check_sales_thread_edit(home_page = 'https://geekhack.org/index.php?topic=79
                    msg_subject = 'etf thread update!',
                    msg_body = 'https://geekhack.org/index.php?topic=79513.0\n' + str(image_string))
     else:
-        print(str(get_current_date()) + ': no sales updates')
+        print('no sales updates')
         
 def birb_it_up():
     threading.Timer(30.0, birb_it_up).start()
@@ -240,7 +223,7 @@ def birb_it_up():
         birb_array.extend(new_posts)
         write_birb_log(birb_array = birb_array)
         if new_birb_check(new_posts) == True:
-            print(str(get_current_date()) + ': birb!')
+            print('birb!')
             send_email(username = '',
                        password = '',
                        msg_to = '',
@@ -249,11 +232,11 @@ def birb_it_up():
                        msg_body = str(url) + '\nhttps://geekhack.org/index.php?topic=79513.0')
     
         if len(new_posts) > 0:
-            print(str(get_current_date()) + ': ' + str(len(new_posts)) + ' new posts added:')
+            print(str(len(new_posts)) + ' new posts added:')
             for i in range(len(new_posts)):
                 print(birb_array[len(birb_array) - (len(new_posts)-i)])
         else:
-            print(str(get_current_date()) + ': no new posts')
+            print('no new posts')
             
         page_number += 1
         page_increment += 50
