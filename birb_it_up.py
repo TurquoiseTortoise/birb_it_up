@@ -222,10 +222,10 @@ def birb_it_up():
         write_birb_log(birb_array = birb_array)
         if new_birb_check(new_posts) == True:
             print('birb!')
-            send_email(username = 'BirbItUp@gmail.com',
-                       password = 'BirbIsTheWord',
+            send_email(username = '',
+                       password = '',
                        msg_to = '',
-                       msg_bcc = 'willtran87@gmail.com, manlyboob@gmail.com',
+                       msg_bcc = '',
                        msg_subject = 'birb',
                        msg_body = str(url) + '\nhttps://geekhack.org/index.php?topic=79513.0')
     
