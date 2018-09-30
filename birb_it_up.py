@@ -199,10 +199,10 @@ def check_sales_thread_edit(home_page = 'https://geekhack.org/index.php?topic=79
         print('sales thread update!')
         image_list = get_images(sales_post)
         image_string = list_to_string(image_list)
-        send_email(username = 'BirbItUp@gmail.com',
-                   password = 'BirbIsTheWord',
+        send_email(username = '',
+                   password = '',
                    msg_to = '',
-                   msg_bcc = 'willtran87@gmail.com, manlyboob@gmail.com',
+                   msg_bcc = '',
                    msg_subject = 'etf thread update!',
                    msg_body = 'https://geekhack.org/index.php?topic=79513.0\n' + str(image_string))
 
