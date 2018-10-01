@@ -182,6 +182,12 @@ def get_images(post_text):
     images = list(set(images))
     return images
 
+def get_forms(post_text):
+    form_pattern = r'\"(https://goo.gl/forms.+?)\"'
+    forms = re.findall(form_pattern, post_text, re.DOTALL)
+    forms = list(set(forms))
+    return forms
+
 def list_to_string(image_list):
     image_string = ''
     for i in range(len(image_list)):
@@ -191,7 +197,7 @@ def list_to_string(image_list):
 #--------------------------------------------------------------------------------------------------#
         
 def check_sales_thread_edit(home_page = 'https://geekhack.org/index.php?topic=79513.0'):
-    threading.Timer(60.0, check_sales_thread_edit).start()
+    threading.Timer(45.0, check_sales_thread_edit).start()
     home_page_text = get_url_text(home_page)
     sales_post = get_posts(home_page_text)[0]
     last_edit = re_time_stamp(get_last_edit(sales_post))
@@ -199,17 +205,19 @@ def check_sales_thread_edit(home_page = 'https://geekhack.org/index.php?topic=79
         print('sales thread update!')
         image_list = get_images(sales_post)
         image_string = list_to_string(image_list)
+        form_list = get_forms(sales_post)
+        form_string = list_to_string(form_list)
         send_email(username = '',
                    password = '',
                    msg_to = '',
                    msg_bcc = '',
                    msg_subject = 'etf thread update!',
-                   msg_body = 'https://geekhack.org/index.php?topic=79513.0\n' + str(image_string))
+                   msg_body = 'https://geekhack.org/index.php?topic=79513.0\n\n' + str(image_string) + '\n' + str(form_string))
     else:
         print('no sales updates')
         
 def birb_it_up():
-    threading.Timer(30.0, birb_it_up).start()
+    threading.Timer(25.0, birb_it_up).start()
     birb_array = open_birb_log()
     post_count = 50
     page_number = math.ceil((len(birb_array)+1) / 50)
